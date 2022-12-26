@@ -30,15 +30,15 @@ class Crawler():
         values_elements = self.page.html.find("span.value") # Search value in html
         values = [element.text for element in values_elements] # Parse values into list
         values = values[0:len(self.data["units"])] # Eliminate unnecessary items
-        values = [float(value) for value in values]
-        for i in range(len(self.data["units"])):
+        values = [float(value) for value in values] # Casts values to floats
+        for i in range(len(self.data["units"])): # Change kW, MW, ..., to W
             if ("kW" in self.data["units"][i]):
                 values[i] *= 1000
             elif ("MW" in self.data["units"][i]):
                 values[i] *= 1000000
-        self.data["values"] = [int(value) for value in values]
+        self.data["values"] = [int(value) for value in values] # Casts values to ints
         self.data["values_reduced"] = list()
-        for i in range(len(self.data["values"])):
+        for i in range(len(self.data["values"])): # Eliminate unnecessary value columns
             if (self.data["titles"][i + 1] in self.data["titles_reduced"]):
                 self.data["values_reduced"].append(self.data["values"][i])
         
@@ -57,9 +57,10 @@ class Crawler():
         else:
             filename_csv = self.filename_csv
         with open(filename_csv, "a") as file_csv:
-            writer_csv = csv.writer(file_csv)
-            time_values = [datetime.now().isoformat(timespec="seconds")]
-            for value in self.data["values_reduced"]:
-                time_values.append(value)
-            writer_csv.writerow(time_values)
+            if (None not in self.data["values_reduced"]): # Discard empty rows
+                writer_csv = csv.writer(file_csv)
+                time_values = [datetime.now().isoformat(timespec="seconds")]
+                for value in self.data["values_reduced"]: # Append value after Time column
+                    time_values.append(value)
+                writer_csv.writerow(time_values)
             file_csv.close()
