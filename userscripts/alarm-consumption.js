@@ -7,13 +7,13 @@
 // @namespace    http://[envoy-ip]/home
 // @version      0.1
 // @description  Plays alarm if power usage high.
-// @author       BungyStudios
+// @author       BangyStudios
 // @match        http://[envoy-ip]/home
 // @grant        none
 // ==/UserScript==
 
 var value = document.getElementsByClassName("list-group-item");
-var alarm = new Audio("https://www.bungystudios.com/wp-content/uploads/2021/09/loud_alarm.mp3"); // Alarm sound file location
+var alarm = new Audio("https://www.bangystudios.com/wp-content/uploads/2021/09/loud_alarm.mp3"); // Alarm sound file location
 
 function query() {
     if (value.item(2).getElementsByClassName("units").item(0).innerText == "kW") {
