@@ -1,17 +1,11 @@
-import config
 from requests_html import HTMLSession
-from datetime import datetime
-import csv
-
-config:dict = config.ConfigReader().read() # Read config
 
 class Crawler():
-    def __init__(self):
+    def __init__(self, config):
         """Initiate Crawler"""
         self.host = config.get("host")
         self.session = HTMLSession()
         self.timeout_page = config.get("timeout_page")
-        self.path_csv = config.get("path_csv")
         self.data = dict()
         self.data["titles"] = ["Time", "Production", "Production (Lifetime)", 
                   "Consumption", "Consumption (Lifetime)", 
@@ -41,26 +35,3 @@ class Crawler():
         for i in range(len(self.data["values"])): # Eliminate unnecessary value columns
             if (self.data["titles"][i + 1] in self.data["titles_reduced"]):
                 self.data["values_reduced"].append(self.data["values"][i])
-        
-    def write_titles_csv(self):
-        """Writes titles and units into csv"""
-        self.filename_csv = self.path_csv + "/" + datetime.now().isoformat(timespec="seconds") + ".csv"
-        with open(self.filename_csv, "w") as file_csv:
-            writer_csv = csv.writer(file_csv)
-            writer_csv.writerow(self.data["titles_reduced"])
-            file_csv.close()
-            
-    def write_values_csv(self, filename_csv=None):
-        """Writes class page data into csv"""
-        if (filename_csv != None):
-            filename_csv = self.path_csv + "/" + filename_csv + ".csv"
-        else:
-            filename_csv = self.filename_csv
-        with open(filename_csv, "a") as file_csv:
-            if (None not in self.data["values_reduced"]): # Discard empty rows
-                writer_csv = csv.writer(file_csv)
-                time_values = [datetime.now().isoformat(timespec="seconds")]
-                for value in self.data["values_reduced"]: # Append value after Time column
-                    time_values.append(value)
-                writer_csv.writerow(time_values)
-            file_csv.close()
