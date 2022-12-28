@@ -39,3 +39,16 @@ class Crawler():
         for i in range(len(self.data["values"])): # Eliminate unnecessary value columns
             if (self.data["titles"][i + 1] in self.data["titles_reduced"]):
                 self.data["values_reduced"].append(self.data["values"][i])
+
+class Calculator():
+    def __init__(self):
+        """Initiate calculator"""
+        pass
+    def get_net(self, data):
+        """Return the surplus electricity from data in watts"""
+        for i in range(len(data["titles_reduced"])):
+            if (data["titles_reduced"][i] == "Production"):
+                production = data["values_reduced"][i]
+            if (data["titles_reduced"][i] == "Consumption"):
+                consumption = data["values_reduced"][i]
+        return production - consumption
