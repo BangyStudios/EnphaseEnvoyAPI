@@ -49,12 +49,15 @@ class Crawler():
 class Calculator():
     def __init__(self):
         """Initiate calculator"""
-        pass
+        self.net = 0
     def get_net(self, data):
-        """Return the surplus electricity from data in watts"""
+        """Return the surplus electricity from data in watts or 0 if error"""
+        if (len(data["titles_reduced"]) - 1 != len(data["values_reduced"])):
+            return self.net
         for i in range(len(data["titles_reduced"])):
             if (data["titles_reduced"][i] == "Production"):
                 production = data["values_reduced"][i - 1]
             if (data["titles_reduced"][i] == "Consumption"):
                 consumption = data["values_reduced"][i - 1]
-        return production - consumption
+        self.net = production - consumption
+        return self.net
