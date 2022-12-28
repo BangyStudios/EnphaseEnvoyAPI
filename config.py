@@ -3,7 +3,8 @@ import json
 template_config = {
     "host" : "[hostname]", 
     "timeout_page" : 10, 
-    "path_csv" : "data"
+    "path_csv" : "data",
+    "path_temp" : "data"
 }
 
 class ConfigReader:

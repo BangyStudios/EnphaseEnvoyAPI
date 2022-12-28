@@ -28,3 +28,15 @@ class CSV:
                     time_values.append(value)
                 writer_csv.writerow(time_values)
             file_csv.close()
+            
+class TempFile:
+    def __init__(self, config):
+        self.path_temp = config.get("path_temp")
+    
+    def write_net_temp(self, net, filename_temp=None):
+        """Writes class page data into csv"""
+        filename_txt = self.path_temp + "/" + "temp.txt"
+        with open(filename_txt, "w") as file_txt:
+            writer_csv = csv.writer(file_txt)
+            writer_csv.writerow(net)
+            file_txt.close()
