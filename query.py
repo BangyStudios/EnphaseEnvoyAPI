@@ -1,7 +1,8 @@
+import config
 from requests_html import HTMLSession
 
 class Crawler():
-    def __init__(self, config):
+    def __init__(self, config=config.ConfigReader().read()):
         """Initiate Crawler"""
         self.host = config.get("host")
         self.session = HTMLSession()
