@@ -11,7 +11,11 @@ class Crawler():
                   "Consumption", "Consumption (Lifetime)", 
                   "Net Power"] # Titles for data fields
         self.data["titles_reduced"] = ["Time", "Production", "Consumption"] # Reduced titles for data fields"
-        
+    
+    def get_data(self):
+        """Return the latest data from updated page"""
+        return self.data
+    
     def update_page(self):
         """Updates class page"""
         self.page = self.session.get("http://" + self.host) # Get page
