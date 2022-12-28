@@ -16,7 +16,7 @@ while True:
         crawler.update_page()
         crawler.update_page_data()
         # csv.write_values_csv(crawler.data["values_reduced"])
-        txt.write_net_temp(calculator.get_net(crawler.data["values_reduced"]))
+        txt.write_net_temp([calculator.get_net(crawler.data)])
     except (ConnectionError):
         print("Cannot reach host, retrying in 10s...")
         time.sleep(10)

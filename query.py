@@ -54,7 +54,7 @@ class Calculator():
         """Return the surplus electricity from data in watts"""
         for i in range(len(data["titles_reduced"])):
             if (data["titles_reduced"][i] == "Production"):
-                production = data["values_reduced"][i]
+                production = data["values_reduced"][i - 1]
             if (data["titles_reduced"][i] == "Consumption"):
-                consumption = data["values_reduced"][i]
+                consumption = data["values_reduced"][i - 1]
         return production - consumption
