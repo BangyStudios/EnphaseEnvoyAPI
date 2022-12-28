@@ -40,6 +40,11 @@ class Crawler():
         for i in range(len(self.data["values"])): # Eliminate unnecessary value columns
             if (self.data["titles"][i + 1] in self.data["titles_reduced"]):
                 self.data["values_reduced"].append(self.data["values"][i])
+                
+    def update_data(self):
+        """Reload page and update data from it."""
+        self.update_page()
+        self.update_data()
 
 class Calculator():
     def __init__(self):
