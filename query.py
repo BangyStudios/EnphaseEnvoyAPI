@@ -5,7 +5,6 @@ class Crawler():
     def __init__(self, config=config.ConfigReader().read()):
         """Initiate Crawler"""
         self.host = config.get("host")
-        self.session = HTMLSession()
         self.timeout_page = config.get("timeout_page")
         self.data = dict()
         self.data["titles"] = ["Time", "Production", "Production (Lifetime)", 
@@ -18,9 +17,11 @@ class Crawler():
         return self.data
     
     def update_page(self):
-        """Updates class page"""
+        """Updates js values on class page"""
+        self.session = HTMLSession()
         self.page = self.session.get("http://" + self.host) # Get page
         self.page.html.render(sleep=self.timeout_page) # Wait for js render
+        self.session.close()
         
     def update_page_data(self):
         """Update class page data into a dict"""
@@ -44,7 +45,7 @@ class Crawler():
     def update_data(self):
         """Reload page and update data from it."""
         self.update_page()
-        self.update_data()
+        self.update_page_data()
 
 class Calculator():
     def __init__(self):

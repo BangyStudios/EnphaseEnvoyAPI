@@ -3,6 +3,7 @@ import query
 import database
 import time
 from requests.exceptions import ConnectionError
+from pyppeteer.errors import TimeoutError, PageError
 
 config:dict = config.ConfigReader().read() # Read config
 
@@ -13,11 +14,12 @@ txt = database.TempFile(config)
 # csv.write_titles_csv(crawler.data["titles_reduced"])
 while True:
     try:
-        crawler.update_page()
-        crawler.update_page_data()
+        crawler.update_data()
         # csv.write_values_csv(crawler.data["values_reduced"])
-        txt.write_net_temp([calculator.get_net(crawler.data)])
-    except (ConnectionError):
+        net_temp = calculator.get_net(crawler.data)
+        txt.write_net_temp([net_temp])
+        print(net_temp)
+    except (ConnectionError, TimeoutError, PageError):
         print("Cannot reach host, retrying in 10s...")
         time.sleep(10)
         continue
