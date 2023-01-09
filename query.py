@@ -6,6 +6,7 @@ class Crawler():
         """Initiate Crawler"""
         self.host = config.get("host")
         self.timeout_page = config.get("timeout_page")
+        self.sleep_page = config.get("sleep_page")
         self.data = dict()
         self.data["titles"] = ["Time", "Production", "Production (Lifetime)", 
                   "Consumption", "Consumption (Lifetime)", 
@@ -20,7 +21,7 @@ class Crawler():
         """Updates js values on class page"""
         self.session = HTMLSession()
         self.page = self.session.get("http://" + self.host) # Get page
-        self.page.html.render(sleep=self.timeout_page) # Wait for js render
+        self.page.html.render(sleep=self.sleep_page, timeout=self.timeout_page) # Wait for js render
         self.session.close()
         
     def update_page_data(self):

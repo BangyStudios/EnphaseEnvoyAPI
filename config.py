@@ -2,7 +2,8 @@ import json
 
 template_config = {
     "host" : "[hostname]", 
-    "timeout_page" : 10, 
+    "sleep_page" : 5, 
+    "timeout_page" : 20, 
     "path_csv" : "data",
     "path_temp" : "data"
 }

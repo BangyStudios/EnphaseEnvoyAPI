@@ -1,1 +1,1 @@
-{"host": "192.168.0.22", "timeout_page" : 30, "path_csv" : "data", "path_temp" : "data"}
+{"host": "192.168.0.22", "sleep_page" : 5, "timeout_page" : 20, "path_csv" : "data", "path_temp" : "data"}
