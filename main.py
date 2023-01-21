@@ -19,16 +19,8 @@ while True:
         net_temp = calculator.get_net(crawler.data)
         txt.write_net_temp([net_temp])
         print(f"Net: {net_temp}")
-        time.sleep(10)
-    except (ConnectionError):
-        print("ConnectionError, retrying in 10s...")
-        time.sleep(10)
-        continue
-    except (TimeoutError):
-        print("TimeoutError, retrying in 10s...")
-        time.sleep(10)
-        continue
-    except (PageError):
-        print("PageError, retrying in 10s...")
+        time.sleep(25)
+    except (ConnectionError, TimeoutError, PageError):
+        print("Connection failed, retrying in 10s...")
         time.sleep(10)
         continue
