@@ -5,7 +5,7 @@ import csv
 class CSV:
     def __init__(self, config):
         self.path_csv = config.get("path_csv")
-        
+
     def write_titles_csv(self, titles):
         """Writes titles and creates csv"""
         self.filename_csv = f"{self.path_csv}/{datetime.now().strftime('%Y%m%d-%H%M%S')}.csv"
@@ -16,7 +16,7 @@ class CSV:
             writer_csv = csv.writer(file_csv)
             writer_csv.writerow(time_titles)
             file_csv.close()
-            
+
     def write_values_csv(self, values, filename_csv=None):
         """Writes class page data into csv"""
         if (filename_csv != None):
@@ -31,11 +31,11 @@ class CSV:
                     time_values.append(value)
                 writer_csv.writerow(time_values)
             file_csv.close()
-            
+
 class TempFile:
     def __init__(self, config):
         self.path_temp = config.get("path_temp")
-    
+
     def write_net_temp(self, net, filename_temp=None):
         """Writes class page data into csv"""
         filename_txt = f"{self.path_temp}/net.txt"

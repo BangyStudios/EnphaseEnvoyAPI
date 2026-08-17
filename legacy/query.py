@@ -8,8 +8,8 @@ class Crawler():
         self.timeout_page = config.get("timeout_page")
         self.sleep_page = config.get("sleep_page")
         self.data = dict()
-        self.data["titles"] = ["Production", "Production (Lifetime)", 
-                  "Consumption", "Consumption (Lifetime)", 
+        self.data["titles"] = ["Production", "Production (Lifetime)",
+                  "Consumption", "Consumption (Lifetime)",
                   "Net Power"] # Titles for data fields
         self.data["titles_reduced"] = ["Production", "Consumption"] # Reduced titles for data fields"
         self.session = HTMLSession()

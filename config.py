@@ -1,9 +1,12 @@
 import json
 
 template_config = {
-    "host" : "[hostname]", 
-    "sleep_page" : 5, 
-    "timeout_page" : 20, 
+    "flask_host": "127.0.0.1", 
+    "flask_port": 5007, 
+    "flask_debug": False, 
+    "ee_host" : "[hostname]", 
+    "ee_token": "[token]",
+    "ee_cache_ttl": 5, 
     "path_csv" : "data",
     "path_temp" : "data"
 }
@@ -14,7 +17,7 @@ class ConfigReader:
     """
     def __init__(self):
         """Initiate defaults for ConfigReader"""
-        self.path_config = "config.json" # Path to config file
+        self.path_config = "./data/config.json" # Path to config file
     def read(self):
         """Reads config into dict"""
         self.open("r")
