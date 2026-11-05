@@ -6,7 +6,12 @@ template_config = {
     "flask_debug": False, 
     "ee_host" : "[hostname]", 
     "ee_token": "[token]",
-    "ee_cache_ttl": 5, 
+    "ee_serial": "[envoy serial number]",
+    "enlighten_email": "[enlighten email]",
+    "enlighten_password": "[enlighten password]",
+    "ee_poll_interval": 1.0, 
+    "ee_backoff_max": 300, 
+    "ee_timeout": 10, 
     "path_csv" : "data",
     "path_temp" : "data"
 }
@@ -24,6 +29,13 @@ class ConfigReader:
         config = json.load(self.config)
         self.close()
         return config
+    def update(self, values):
+        """Merge values into the config file on disk"""
+        config = self.read()
+        config.update(values)
+        self.open("w")
+        json.dump(config, self.config)
+        self.close()
     def create(self):
         """Create a new configuration template"""
         self.open("w")

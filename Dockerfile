@@ -17,4 +17,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5007", "--workers", "2", "--timeout", "30", "api:create_app()"]
+# Single worker: each worker runs its own poller, so more workers would multiply load on the Envoy.
+CMD ["uvicorn", "--factory", "api:create_app", "--host", "0.0.0.0", "--port", "5007", "--workers", "1"]
